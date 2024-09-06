@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
+@Entity(name = "user")
 @Table(name = "users")
 @Getter
 @Setter
@@ -26,7 +26,7 @@ public class User {
     @Column(unique = true ,nullable = false)
     private String email;
     private String password;
-    @Column(length = 10000)
+    @Column(length = 1000)
     private String about;
     @Column(length = 10000)
     private String profilePic;
