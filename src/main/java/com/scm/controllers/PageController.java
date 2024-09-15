@@ -24,6 +24,11 @@ public class PageController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("/")
+    public String index() {
+        return "redirect:/home";
+    }
+
     @RequestMapping("/home")
     public String home(Model model) {
         System.out.println("Home page handler");
@@ -80,7 +85,8 @@ public class PageController {
 
     // Processing register
     @RequestMapping(value = "/do-register", method = RequestMethod.POST)
-    public String processRegister(@Valid @ModelAttribute UserForm userForm,BindingResult rBindingResult, HttpSession session) {
+    public String processRegister(@Valid @ModelAttribute UserForm userForm, BindingResult rBindingResult,
+            HttpSession session) {
         System.out.println("Processing registration");
         // fetch form data
         // UserForm
