@@ -43,6 +43,8 @@ public class SecurityConfig {
     @Autowired
     private SecurityCustomUserDetailService userDetailService;
 
+    private OAuthAuthenticationSuccessHandler handler;
+
     // configuraiton of authentication providerfor spring security
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -104,12 +106,24 @@ public class SecurityConfig {
                     // });
 
                 });
-                // .csrf(AbstractHttpConfigurer::disable)
-                // .logout(logoutForm -> {
-                //     logoutForm.logoutUrl("/do-register");
-                //     logoutForm.logoutSuccessUrl("/login?logout=true");
-                // });
+        // .csrf(AbstractHttpConfigurer::disable)
+        // .logout(logoutForm -> {
+        // logoutForm.logoutUrl("/do-register");
+        // logoutForm.logoutSuccessUrl("/login?logout=true");
+        // });
 
+        // httpSecurity.csrf(AbstractHttpConfigurer::disable);
+        // // oauth configurations
+
+        // httpSecurity.oauth2Login(oauth -> {
+        //     oauth.loginPage("/login");
+        //     oauth.successHandler(handler);
+        // });
+
+        // httpSecurity.logout(logoutForm -> {
+        //     logoutForm.logoutUrl("/do-logout");
+        //     logoutForm.logoutSuccessUrl("/login?logout=true");
+        // });
         return httpSecurity.build();
     }
 
