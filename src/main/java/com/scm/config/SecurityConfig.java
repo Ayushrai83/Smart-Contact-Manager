@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -68,7 +69,46 @@ public class SecurityConfig {
                     authorize.anyRequest().permitAll();
                 })
                 // Enable form login with default settings
-                .formLogin(Customizer.withDefaults());
+                .formLogin(formLogin -> {
+                    formLogin.loginPage("/login");
+                    formLogin.loginProcessingUrl("/authenticate");
+                    formLogin.defaultSuccessUrl("/user/dashboard", true);
+                    // formLogin.failureForwardUrl("/login?error=true");
+                    // formLogin.defaultSuccessUrl("/home");
+                    formLogin.usernameParameter("email");
+                    formLogin.passwordParameter("password");
+                    // formLogin.failureHandler(new AuthenticationFailureHandler() {
+
+                    // @Override
+                    // public void onAuthenticationFailure(HttpServletRequest request,
+                    // HttpServletResponse response,
+                    // AuthenticationException exception) throws IOException, ServletException {
+                    // // TODO Auto-generated method stub
+                    // throw new UnsupportedOperationException("Unimplemented method
+                    // 'onAuthenticationFailure'");
+                    // }
+
+                    // });
+
+                    // formLogin.successHandler(new AuthenticationSuccessHandler() {
+
+                    // @Override
+                    // public void onAuthenticationSuccess(HttpServletRequest request,
+                    // HttpServletResponse response,
+                    // Authentication authentication) throws IOException, ServletException {
+                    // // TODO Auto-generated method stub
+                    // throw new UnsupportedOperationException("Unimplemented method
+                    // 'onAuthenticationSuccess'");
+                    // }
+
+                    // });
+
+                });
+                // .csrf(AbstractHttpConfigurer::disable)
+                // .logout(logoutForm -> {
+                //     logoutForm.logoutUrl("/do-register");
+                //     logoutForm.logoutSuccessUrl("/login?logout=true");
+                // });
 
         return httpSecurity.build();
     }
