@@ -124,6 +124,7 @@ public class SecurityConfig {
         //     logoutForm.logoutUrl("/do-logout");
         //     logoutForm.logoutSuccessUrl("/login?logout=true");
         // });
+
         return httpSecurity.build();
     }
 
